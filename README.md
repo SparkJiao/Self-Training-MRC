@@ -12,7 +12,7 @@ Besides, the [apex](https://github.com/NVIDIA/apex) toolkit should be installed.
 **Note**: For experiments based on RoBERTa, the [transformers](https://github.com/huggingface/transformers) should be installed. Version is specified as `transformers==2.1.0`.
 We recommend to use another virtual environment to conduct the experiments with RoBERTa, since we have observed this package has a effect on the performance for other experiments.  
 
-**Note**: The runtime experiments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti.
+**Note**: The runtime environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti.
 
 ## Scripts for Dataset Preprocess
 
