@@ -1,0 +1,6 @@
+torch==1.1.0
+pytorch-pretrained-bert==0.6.2
+allennlp==0.8.4
+nltk
+tqdm
+numpy
