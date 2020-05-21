@@ -1,3 +1,23 @@
+A Self-Training Method for MRC
+
+## Requirements
+
+``pip install -r requirements.txt``  
+Besides, the [apex](https://github.com/NVIDIA/apex) toolkit should be installed.  
+Note: For experiments based on RoBERTa, the [transformers](https://github.com/huggingface/transformers) should be installed. Version is specified as `transformers==2.1.0`.
+We recommend to use another virtual environment to conduct the experiments with RoBERTa, since we have observed this package has a effect on the performance for other experiments.  
+Note: The runtime experiments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti.
+
+## Scripts for Dataset Preprocess
+
+Dream: `data_preprocess/dream_data_preprocess.ipynb`  
+MS Marco: `data_preprocess/ms_marco_extract_yesno_combine.ipynb`  
+Multi-RC: `data_preprocess/multi_rc_data_process.ipynb`  
+RACE: `data_preprocess/race_data_processing.ipynb`
+
+To use these scripts, change the data file path in the notebook as your own path and run it. Then change the input file path in the experiment scripts to the output file.
+For CoQA, you don't need extra preprocess and the initial data file can be assigned as the input file.
+
 ## Scripts for Experiments
 ### RACE
 #### Middle
