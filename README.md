@@ -1,6 +1,6 @@
 # A Self-Training Method for MRC
 
-This is the pytorch implementation of the paper: **A Self-Training Method for Machine Reading Comprehension with Soft Evidence Extraction**. Yilin Niu, Fangkai Jiao, Mantong Zhou, TingYao, Jingfang Xu and Minlie Huang. ***ACL 2020***.
+This is the pytorch implementation of the paper: **A Self-Training Method for Machine Reading Comprehension with Soft Evidence Extraction**. Yilin Niu, Fangkai Jiao, Mantong Zhou, Ting Yao, Jingfang Xu and Minlie Huang. ***ACL 2020***.
 
 [PDF]()
 
@@ -24,7 +24,7 @@ RACE: `data_preprocess/race_data_processing.ipynb`
 To use these scripts, change the data file path in the notebook as your own path and run it. Then change the input file path in the experiment scripts to the output file.
 For CoQA, you don't need extra preprocess and the initial data file can be assigned as the input file.
 
-Since the dataset MS Marco is extract from the initial dataset through a randomly drop process, we also release the dataset we extracted by ourselves for testing.
+Since the dataset MS Marco is extract from the initial dataset through a randomly drop process, we also release the dataset we extracted by ourselves for testing in ``data/ms``
 
 ## Scripts for Experiments
 ### RACE
