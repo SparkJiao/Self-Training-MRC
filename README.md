@@ -1,4 +1,8 @@
-A Self-Training Method for MRC
+# A Self-Training Method for MRC
+
+This is the pytorch implementation of the paper: **A Self-Training Method for Machine Reading Comprehension with Soft Evidence Extraction**. Yilin Niu, Fangkai Jiao, Mantong Zhou, TingYao, Jingfang Xu and Minlie Huang. ***ACL 2020***.
+
+[PDF]()
 
 ## Requirements
 
