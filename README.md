@@ -24,6 +24,8 @@ RACE: `data_preprocess/race_data_processing.ipynb`
 To use these scripts, change the data file path in the notebook as your own path and run it. Then change the input file path in the experiment scripts to the output file.
 For CoQA, you don't need extra preprocess and the initial data file can be assigned as the input file.
 
+Since the dataset MS Marco is extract from the initial dataset through a randomly drop process, we also release the dataset we extracted by ourselves for testing.
+
 ## Scripts for Experiments
 ### RACE
 #### Middle
