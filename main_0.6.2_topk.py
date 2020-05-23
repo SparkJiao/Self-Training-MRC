@@ -20,30 +20,27 @@ from __future__ import division
 from __future__ import print_function
 
 import argparse
-import json
-import logging
 import os
 import pickle
 import random
-import sys
 from typing import Tuple
 
 import numpy as np
 import torch
-from allennlp.training.metrics import CategoricalAccuracy
+# from allennlp.training.metrics import CategoricalAccuracy
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from tensorboardX import SummaryWriter
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from torch.utils.data.distributed import DistributedSampler
-from tqdm import tqdm, trange
+from tqdm import tqdm
 
 from bert_model import initialize_model, prepare_model_params
-from data.data_instance import RawResultChoice, WeightResultChoice, ModelState, RawOutput
-from reader import prepare_read_params
-from general_util.utils import AverageMeter
+from data.data_instance import RawResultChoice, ModelState, RawOutput
 from general_util.logger import setting_logger
+from general_util.utils import AverageMeter, CategoricalAccuracyAllen as CategoricalAccuracy
 from reader import initialize_reader
+from reader import prepare_read_params
 
 # def warmup_linear(x, warmup=0.002):
 #     if x < warmup:

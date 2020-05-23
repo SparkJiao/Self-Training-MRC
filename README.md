@@ -2,17 +2,50 @@
 
 This is the pytorch implementation of the paper: **A Self-Training Method for Machine Reading Comprehension with Soft Evidence Extraction**. Yilin Niu, Fangkai Jiao, Mantong Zhou, Ting Yao, Jingfang Xu and Minlie Huang. ***ACL 2020***.
 
-[PDF]()
+[PDF](https://arxiv.org/pdf/2005.05189.pdf)
 
 ## Requirements
 
-``pip install -r requirements.txt``  
-Besides, the [apex](https://github.com/NVIDIA/apex) toolkit should be installed.  
+Our CUDA toolkit version is 10.1. Firstly, you need to create a new virtual environment and install the requirements:
+
+````
+$ conda create -n self-training-mrc python=3.6.9
+$ cd Self-Training-MRC
+$ pip install -r requirements.txt
+````
+
+Besides, the [apex](https://github.com/NVIDIA/apex) toolkit should be installed:  
+
+````
+$ git clone https://github.com/NVIDIA/apex
+$ cd apex
+$ git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
+$ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+````
+
+**Note**: If your CUDA version is 10.1 rather than 10.0, the installation of apex may throw a error caused by minor version mismatch since Pytorch only provides the version complied with ``CUDA==10.0``. As a solution, please change the check code in ``apex/setup.py`` line 75 from  
+``if (bare_metal_major != torch_binary_major) or (bare_metal_minor != torch_binary_minor):``  
+to
+``if (bare_metal_major != torch_binary_major):``  
+and the installation will be completed.
+
+**Note**: Currently, the apex package with latest version will throw a error during installation due to some unknown reasons. Currently the solution is to roll the version back through:
+````git
+$ git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
+````
+For more details, please check [here](https://github.com/NVIDIA/apex/issues/802)
+
+Before running the experiments, the nltk data should be download:
+````
+python  
+>>> import nltk  
+>>> nltk.download('punkt')   
+````
 
 **Note**: For experiments based on RoBERTa, the [transformers](https://github.com/huggingface/transformers) should be installed. Version is specified as `transformers==2.1.0`.
 We recommend to use another virtual environment to conduct the experiments with RoBERTa, since we have observed this package has a effect on the performance for other experiments.  
 
-**Note**: The runtime environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti.
+**Note**: The runtime environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti. We will give the notes.
 
 ## Scripts for Dataset Preprocess
 

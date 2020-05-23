@@ -32,13 +32,13 @@ def wait_for_file(file: str, time_for_writing: int = 1):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "../bert-base-uncased.tar.gz"
+bert_base_vocab = "../bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '../BERT/max_f1/coqa-train-v1.0.json'
-dev_file = '../BERT/max_f1/coqa-dev-v1.0.json'
+train_file = 'data/coqa/coqa-train-v1.0.json'
+dev_file = 'data/coqa/coqa-dev-v1.0.json'
 
 task_name = 'coqa-top-k'
 reader_name = 'coqa-top-k'
@@ -53,7 +53,7 @@ num_evidence = 1
 sentence_id_file = None
 
 top_k = 1500
-root_dir = f"experiments/coqa/topk-self-training/1.0_{top_k}shaod"
+root_dir = f"experiments/coqa/topk-self-training/1.0_{top_k}_roll"
 os.makedirs(root_dir, exist_ok=True)
 
 f_handler = logging.FileHandler(os.path.join(root_dir, f'output.log'))

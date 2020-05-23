@@ -5,15 +5,13 @@ import random
 import re
 import string
 from collections import Counter
-from typing import List, Callable, Tuple, Any
+from typing import List, Callable, Tuple, Any, Optional
 
 import torch
 from pytorch_pretrained_bert.tokenization import BasicTokenizer
 from torch.nn.functional import softmax
-from allennlp.training import metrics
 
 from eval_utils.CoQA_eval import CoQAEvaluator
-from data.data_instance import ModelState
 
 # Named Turple List
 DocSpan = collections.namedtuple("DocSpan", ["start", "length"])
@@ -43,11 +41,10 @@ def remove_all_evidence(sentence_span_list, doc_tokens, evidences):
         doc_tokens = doc_tokens[:evi_token_s] + doc_tokens[(evi_token_e + 1):]
         reduce_offset = evi_token_e - evi_token_s + 1
         sentence_span_list = sentence_span_list[:evidence] + [(s - reduce_offset, e - reduce_offset)
-                                                                                 for s, e in sentence_span_list[(evidence + 1):]]
+                                                              for s, e in sentence_span_list[(evidence + 1):]]
         for pointer in range(index + 1, len(evidences)):
             evidences[pointer] -= 1
     return doc_tokens, sentence_span_list
-
 
 
 def generate_random_seq(seq_len_a: int, seq_len_b: int):
@@ -568,3 +565,108 @@ class AttentionWeightWriter(object):
                 return id_to_str(token_id)
             else:
                 return token_id
+
+
+class CategoricalAccuracyAllen(object):
+    """
+    Categorical Top-K accuracy. Assumes integer labels, with
+    each item to be classified having a single correct class.
+    Tie break enables equal distribution of scores among the
+    classes with same maximum predicted scores.
+    """
+
+    def __init__(self, top_k: int = 1, tie_break: bool = False) -> None:
+        if top_k > 1 and tie_break:
+            raise RuntimeError("Tie break in Categorical Accuracy "
+                               "can be done only for maximum (top_k = 1)")
+        if top_k <= 0:
+            raise RuntimeError("top_k passed to Categorical Accuracy must be > 0")
+        self._top_k = top_k
+        self._tie_break = tie_break
+        self.correct_count = 0.
+        self.total_count = 0.
+
+    def __call__(self,
+                 predictions: torch.Tensor,
+                 gold_labels: torch.Tensor,
+                 mask: Optional[torch.Tensor] = None):
+        """
+        Parameters
+        ----------
+        predictions : ``torch.Tensor``, required.
+            A tensor of predictions of shape (batch_size, ..., num_classes).
+        gold_labels : ``torch.Tensor``, required.
+            A tensor of integer class label of shape (batch_size, ...). It must be the same
+            shape as the ``predictions`` tensor without the ``num_classes`` dimension.
+        mask: ``torch.Tensor``, optional (default = None).
+            A masking tensor the same size as ``gold_labels``.
+        """
+        predictions, gold_labels, mask = self.unwrap_to_tensors(predictions, gold_labels, mask)
+
+        # Some sanity checks.
+        num_classes = predictions.size(-1)
+        if gold_labels.dim() != predictions.dim() - 1:
+            raise RuntimeError("gold_labels must have dimension == predictions.size() - 1 but "
+                               "found tensor of shape: {}".format(predictions.size()))
+        if (gold_labels >= num_classes).any():
+            raise RuntimeError("A gold label passed to Categorical Accuracy contains an id >= {}, "
+                               "the number of classes.".format(num_classes))
+
+        predictions = predictions.view((-1, num_classes))
+        gold_labels = gold_labels.view(-1).long()
+        if not self._tie_break:
+            # Top K indexes of the predictions (or fewer, if there aren't K of them).
+            # Special case topk == 1, because it's common and .max() is much faster than .topk().
+            if self._top_k == 1:
+                top_k = predictions.max(-1)[1].unsqueeze(-1)
+            else:
+                top_k = predictions.topk(min(self._top_k, predictions.shape[-1]), -1)[1]
+
+            # This is of shape (batch_size, ..., top_k).
+            correct = top_k.eq(gold_labels.unsqueeze(-1)).float()
+        else:
+            # prediction is correct if gold label falls on any of the max scores. distribute score by tie_counts
+            max_predictions = predictions.max(-1)[0]
+            max_predictions_mask = predictions.eq(max_predictions.unsqueeze(-1))
+            # max_predictions_mask is (rows X num_classes) and gold_labels is (batch_size)
+            # ith entry in gold_labels points to index (0-num_classes) for ith row in max_predictions
+            # For each row check if index pointed by gold_label is was 1 or not (among max scored classes)
+            correct = max_predictions_mask[torch.arange(gold_labels.numel()).long(), gold_labels].float()
+            tie_counts = max_predictions_mask.sum(-1)
+            correct /= tie_counts.float()
+            correct.unsqueeze_(-1)
+
+        if mask is not None:
+            correct *= mask.view(-1, 1).float()
+            self.total_count += mask.sum()
+        else:
+            self.total_count += gold_labels.numel()
+        self.correct_count += correct.sum()
+
+    def get_metric(self, reset: bool = False):
+        """
+        Returns
+        -------
+        The accumulated accuracy.
+        """
+        if self.total_count > 1e-12:
+            accuracy = float(self.correct_count) / float(self.total_count)
+        else:
+            accuracy = 0.0
+        if reset:
+            self.reset()
+        return accuracy
+
+    def reset(self):
+        self.correct_count = 0.0
+        self.total_count = 0.0
+
+    @staticmethod
+    def unwrap_to_tensors(*tensors: torch.Tensor):
+        """
+        If you actually passed gradient-tracking Tensors to a Metric, there will be
+        a huge memory leak, because it will prevent garbage collection for the computation
+        graph. This method ensures that you're using tensors directly and that they are on
+        the CPU.
+        """
+        return (x.detach().cpu() if isinstance(x, torch.Tensor) else x for x in tensors)
