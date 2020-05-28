@@ -27,13 +27,13 @@ def wait_for_file(file: str):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/multi-rc/splitv2/train.json'
-dev_file = '/home/jiaofangkai/multi-rc/splitv2/dev.json'
+train_file = 'data/multi_rc/train.json'
+dev_file = 'data/multi_rc/dev.json'
 
 task_name = 'topk-rc'
 reader_name = 'topk-multi-rc'

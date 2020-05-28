@@ -26,7 +26,7 @@ import pickle
 import random
 from typing import Tuple, List, Dict
 
-from allennlp.training.metrics import CategoricalAccuracy
+# from allennlp.training.metrics import CategoricalAccuracy
 import numpy as np
 import torch
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
@@ -39,7 +39,7 @@ from tqdm import tqdm, trange
 from bert_model import initialize_model, prepare_model_params
 from data.data_instance import RawResultChoice, RawOutput, ModelState
 from general_util.logger import setting_logger
-from general_util.utils import AverageMeter
+from general_util.utils import AverageMeter, CategoricalAccuracyAllen as CategoricalAccuracy
 from reader import initialize_reader
 from reader import prepare_read_params
 
@@ -210,7 +210,7 @@ def main():
             raise ValueError("Output directory () already exists and is not empty.")
         os.makedirs(args.output_dir, exist_ok=True)
 
-    if args.do_predict  or args.do_label:
+    if args.do_predict or args.do_label:
         os.makedirs(args.predict_dir, exist_ok=True)
 
     tokenizer = BertTokenizer.from_pretrained(args.vocab_file)

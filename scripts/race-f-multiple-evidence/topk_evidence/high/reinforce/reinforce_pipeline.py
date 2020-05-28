@@ -19,14 +19,14 @@ def run_cmd(command: str):
     subprocess.check_call(command, shell=True)
 
 
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/RACE/RACE/train-high.json'
-dev_file = '/home/jiaofangkai/RACE/RACE/dev-high.json'
-test_file = '/home/jiaofangkai/RACE/RACE/test-high.json'
+train_file = 'data/RACE/train-high-ini.json'
+dev_file = 'data/RACE/dev-high.json'
+test_file = 'data/RACE/test-high.json'
 
 task_name = 'race'
 reader_name = 'multiple-race'
@@ -48,7 +48,7 @@ cmd = f'python main_multi_choice_top_k_evidence.py --bert_model bert-base-uncase
       f'--evidence_lambda 0.0  ' \
       f'--metric {metric} --do_train --do_predict --use_gumbel --freeze_bert --seed {args.seed} '
 
-run_cmd(cmd)
+# run_cmd(cmd)
 
 bert_name = 'hie-race-reinforce'
 output_dir = f'experiments/race/high/reinforce-fine-tune/v1.0_seed{args.seed}'

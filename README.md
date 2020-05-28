@@ -23,19 +23,19 @@ $ git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
 $ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ````
 
-**Note**: If your CUDA version is 10.1 rather than 10.0, the installation of apex may throw a error caused by minor version mismatch since Pytorch only provides the version complied with ``CUDA==10.0``. As a solution, please change the check code in ``apex/setup.py`` line 75 from  
+**Note**: If your CUDA version is 10.1 rather than 10.0, the installation of apex may throw a error caused by minor version mismatch since Pytorch only provides the package ``torch==1.1.0`` complied with ``CUDA==10.0``. As a solution, please change the check code in ``apex/setup.py`` line 75 from  
 ``if (bare_metal_major != torch_binary_major) or (bare_metal_minor != torch_binary_minor):``  
-to
+to  
 ``if (bare_metal_major != torch_binary_major):``  
 and the installation will be completed.
 
-**Note**: Currently, the apex package with latest version will throw a error during installation due to some unknown reasons. Currently the solution is to roll the version back through:
+**Note**: Currently, the apex package with latest version will throw a error during installation due to some unknown reasons. Currently (till 5/23/2020) the solution is to roll the version back through:
 ````git
-$ git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
+$ git reset --hard 66158f66a027a2e7de483d9b3e6ca7c889489b13
 ````
-For more details, please check [here](https://github.com/NVIDIA/apex/issues/802)
+For more details, please check the [issue](https://github.com/NVIDIA/apex/issues/802).
 
-Before running the experiments, the nltk data should be download:
+Before running the experiments, the nltk data should be downloaded if it haven't been:
 ````
 python  
 >>> import nltk  
@@ -45,7 +45,7 @@ python
 **Note**: For experiments based on RoBERTa, the [transformers](https://github.com/huggingface/transformers) should be installed. Version is specified as `transformers==2.1.0`.
 We recommend to use another virtual environment to conduct the experiments with RoBERTa, since we have observed this package has a effect on the performance for other experiments.  
 
-**Note**: The runtime environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti. We will give the notes.
+**Note**: The hardware environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti. We will give the notes.
 
 ## Scripts for Dataset Preprocess
 
@@ -57,23 +57,24 @@ RACE: `data_preprocess/race_data_processing.ipynb`
 To use these scripts, change the data file path in the notebook as your own path and run it. Then change the input file path in the experiment scripts to the output file.
 For CoQA, you don't need extra preprocess and the initial data file can be assigned as the input file.
 
-Since the dataset MS Marco is extract from the initial dataset through a randomly drop process, we also release the dataset we extracted by ourselves for testing in ``data/ms_marco_dp0.7``
+To make sure that our experiments is reproducible, we will release the process data for RACE and MS Marco. The former is due to the random order of reading files.
+While the latter is due to being extracting through a randomly drop process. The released data can be found under ``data/``.  
 
 ## Scripts for Experiments
 ### RACE
 #### Middle
-MLP: `scripts/race-f-multiple-evidence/topk_evidence/middle/scratch/scratch1.0.py`  
+MLP: `scripts/race-f-multiple-evidence/topk_evidence/middle/scratch/scratch1.0.py`  (RTX 2080Ti|checked)   
 rule: `scripts/race-f-multiple-evidence/topk_evidence/middle/rule/rule_idf_1.0.py`  
 Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/middle/reinforce/reinforce_pipeline.py` (TITAN XP)    
 Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/middle/co-training/co-training1.0.py`  
-Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/middle/self-training/self-training1.0.py`
+Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/middle/self-training/self-training1.0.py`  (RTX 2080Ti|checked)  
 
 #### High
-MLP: `scripts/race-f-multiple-evidence/topk_evidence/high/scratch/scratch1.0.py`  
+MLP: `scripts/race-f-multiple-evidence/topk_evidence/high/scratch/scratch1.0.py`  (RTX 2080Ti|checked)   
 rule: `scripts/race-f-multiple-evidence/topk_evidence/high/rule/rule_idf_1.0.py`  
 Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/high/reinforce/reinforce_pipeline.py`  (TITAN XP)  
 Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/co-training/co-training2.0.py`  
-Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/self-training/self-training1.2.py`  
+Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/self-training/self-training1.2.py`  (RTX 2080Ti|checking)
 
 #### All
 MLP: `scripts/race-f-multiple-evidence/topk_evidence/combine/scratch/scratch1.0.py`  
@@ -84,12 +85,12 @@ Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/combine/co-training
 
 ### CoQA
 
-BERT-MLP/HA/HA+Gold: `scripts/coqa/coqa_scratch_lr_test2.py`  
-Self-Training: `scripts/coqa-co-training/topk_evidence_self_training/self_training1.0.py`  
+BERT-MLP/HA/HA+Gold: `scripts/coqa/coqa_scratch_lr_test2.py`  (TITAN XP|checked)
+Self-Training: `scripts/coqa-co-training/topk_evidence_self_training/self_training1.0.py`  (TITAN XP|checked)
 Co-Training: `scripts/coqa-co-training/topk_evidence/cotraining_top_k1.3.py`  
 RoBERTa-Self-Training: `2.0第一轮参数+1.2后续轮参数`  
 Rule:   
-Reinforce: `scripts/coqa-co-training/reinforce/gumbel_pretrain2.0.py` + `scripts/coqa-co-training/reinforce/reinforce3.0.py`
+Reinforce: `scripts/coqa-co-training/reinforce/gumbel_pretrain2.0.py` + `scripts/coqa-co-training/reinforce/reinforce3.0.py`  (TITAN XP|checked)  
 
 ### MARCO
 
@@ -103,12 +104,12 @@ Co-Training: `scripts/marco-cb-dp0.7-co-training/top-k-co-training/cotraining_to
 
 ### Multi-RC
 
-MLP: `scripts/multi_rc/scratch/mlp1.0.py`  
-HA: `scripts/multi_rc/topk_scratch/hie.py`  
-HA-super: `scripts/multi_rc/topk_scratch/hie-super.py`  
-Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`  
+MLP: `scripts/multi_rc/scratch/mlp1.0.py`  (RTX 2080Ti|checked)
+HA: `scripts/multi_rc/topk_scratch/hie.py`  (RTX 2080Ti|checked)
+HA-super: `scripts/multi_rc/topk_scratch/hie-super.py`  (RTX 2080Ti|checked)
+Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`
 Reinforce: `scripts/multi_rc/reinforce/reinforce_fine_tune1.0.py`  
-Self-Training: `scripts/multi_rc/topk_evidence_self_training/self_training2.0.py`  
+Self-Training: `scripts/multi_rc/topk_evidence_self_training/self_training2.0.py`  (RTX 2080Ti|checking)
 Co-Training: `scripts/multi_rc/topk_evidence_co_training/cotraining_top_k2.0.py`  
 
 ### Dream   

@@ -27,13 +27,13 @@ def wait_for_file(file: str):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/multi-rc/splitv2/train.json'
-dev_file = '/home/jiaofangkai/multi-rc/splitv2/dev.json'
+train_file = 'data/multi_rc/train.json'
+dev_file = 'data/multi_rc/dev.json'
 
 task_name = 'topk-rc'
 reader_name = 'topk-multi-rc'
@@ -69,7 +69,7 @@ predict_cmd = f'python main_0.6.2_topk_predict_sentences.py --bert_model bert-ba
     f'--evidence_lambda {evidence_lambda} ' \
     f'--do_label --num_evidence {num_evidence} '
 
-run_cmd(predict_cmd)
+# run_cmd(predict_cmd)
 
 cmd = f'python main_0.6.2_topk.py --bert_model bert-base-uncased ' \
     f'--vocab_file {bert_base_vocab} --model_file {bert_base_model} --output_dir {output_dir} --predict_dir {output_dir} ' \
@@ -80,4 +80,4 @@ cmd = f'python main_0.6.2_topk.py --bert_model bert-base-uncased ' \
     f'--bert_name {bert_name} --task_name {task_name} --reader_name {reader_name} ' \
     f'--evidence_lambda {evidence_lambda} ' \
     f'--do_predict --remove_evidence '
-run_cmd(cmd)
+# run_cmd(cmd)

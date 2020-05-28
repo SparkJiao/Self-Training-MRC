@@ -53,7 +53,7 @@ num_evidence = 1
 sentence_id_file = None
 
 top_k = 1500
-root_dir = f"experiments/coqa/topk-self-training/1.0_{top_k}_roll"
+root_dir = f"experiments/coqa/topk-self-training/1.0_{top_k}"
 os.makedirs(root_dir, exist_ok=True)
 
 f_handler = logging.FileHandler(os.path.join(root_dir, f'output.log'))

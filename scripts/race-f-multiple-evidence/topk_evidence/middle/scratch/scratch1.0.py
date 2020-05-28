@@ -28,14 +28,14 @@ def wait_for_file(file: str, minute: int = 1):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/RACE/RACE/train-middle.json'
-dev_file = '/home/jiaofangkai/RACE/RACE/dev-middle.json'
-test_file = '/home/jiaofangkai/RACE/RACE/test-middle.json'
+train_file = 'data/RACE/train-middle-ini.json'
+dev_file = 'data/RACE/dev-middle.json'
+test_file = 'data/RACE/test-middle.json'
 
 task_name = 'race'
 reader_name = 'multiple-race'
@@ -45,14 +45,14 @@ num_train_epochs = 3
 
 metric = 'accuracy'
 
-output_dir = f'experiments/race/topk-evidence/middle/pool/v1.0'
+output_dir = f'experiments/race/topk-evidence/middle/pool/v1.0-roll-ini'
 
 cmd = f'python main_multi_choice_top_k_evidence.py --bert_model bert-base-uncased ' \
     f'--vocab_file {bert_base_vocab} --model_file {bert_base_model} --output_dir {output_dir} --predict_dir {output_dir} ' \
     f'--train_file {train_file} --predict_file {dev_file} --test_file {test_file} ' \
     f'--max_seq_length 380 --train_batch_size 32 --predict_batch_size 4 ' \
     f'--learning_rate {learning_rate} --num_train_epochs {num_train_epochs} ' \
-    f'--fp16 --gradient_accumulation_steps 8 --per_eval_step 6000 ' \
+    f'--fp16 --gradient_accumulation_steps 8 --per_eval_step 3000 ' \
     f'--bert_name {bert_name} --task_name {task_name} --reader_name {reader_name} ' \
     f'--metric {metric} '
 

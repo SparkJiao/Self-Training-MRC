@@ -34,14 +34,14 @@ def wait_for_file(file: str, minute: int = 1):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/RACE/RACE/train-high.json'
-dev_file = '/home/jiaofangkai/RACE/RACE/dev-high.json'
-test_file = '/home/jiaofangkai/RACE/RACE/test-high.json'
+train_file = 'data/RACE/train-high-ini.json'
+dev_file = 'data/RACE/dev-high.json'
+test_file = 'data/RACE/test-high.json'
 
 task_name = 'race'
 reader_name = 'multiple-race'
@@ -56,7 +56,7 @@ recurrent_times = 10
 num_train_epochs = [3] * 10
 sentence_id_file = None
 
-root_dir = f'experiments/race/topk-evidence/high/self-training/v1.2_acc_top{k}'
+root_dir = f'experiments/race/topk-evidence/high/self-training/v1.2_acc_top{k}_5'
 os.makedirs(root_dir, exist_ok=True)
 
 f_handler = logging.FileHandler(os.path.join(root_dir, f'output.log'))
@@ -99,8 +99,7 @@ for i in range(recurrent_times):
         f'--do_label --only_correct --label_threshold {label_threshold} --weight_threshold {weight_threshold} ' \
         f'--metric {metric} --num_evidence {num_evidence} '
 
-    if i > 0:
-        cmd += ' --do_train --do_predict '
+    cmd += ' --do_train --do_predict '
 
     if i == 0:
         pass
