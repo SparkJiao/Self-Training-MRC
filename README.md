@@ -85,8 +85,8 @@ Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/combine/co-training
 
 ### CoQA
 
-BERT-MLP/HA/HA+Gold: `scripts/coqa/coqa_scratch_lr_test2.py`  (TITAN XP|checked)
-Self-Training: `scripts/coqa-co-training/topk_evidence_self_training/self_training1.0.py`  (TITAN XP|checked)
+BERT-MLP/HA/HA+Gold: `scripts/coqa/coqa_scratch_lr_test2.py`  (TITAN XP|checked)  
+Self-Training: `scripts/coqa-co-training/topk_evidence_self_training/self_training1.0.py`  (TITAN XP|checked)  
 Co-Training: `scripts/coqa-co-training/topk_evidence/cotraining_top_k1.3.py`  
 RoBERTa-Self-Training: `2.0第一轮参数+1.2后续轮参数`  
 Rule:   
@@ -104,19 +104,19 @@ Co-Training: `scripts/marco-cb-dp0.7-co-training/top-k-co-training/cotraining_to
 
 ### Multi-RC
 
-MLP: `scripts/multi_rc/scratch/mlp1.0.py`  (RTX 2080Ti|checked)
-HA: `scripts/multi_rc/topk_scratch/hie.py`  (RTX 2080Ti|checked)
-HA-super: `scripts/multi_rc/topk_scratch/hie-super.py`  (RTX 2080Ti|checked)
-Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`
+MLP: `scripts/multi_rc/scratch/mlp1.0.py`  (RTX 2080Ti|checked)  
+HA: `scripts/multi_rc/topk_scratch/hie.py`  (RTX 2080Ti|checked)  
+HA-super: `scripts/multi_rc/topk_scratch/hie-super.py`  (RTX 2080Ti|checked)  
+Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`  
 Reinforce: `scripts/multi_rc/reinforce/reinforce_fine_tune1.0.py`  
-Self-Training: `scripts/multi_rc/topk_evidence_self_training/self_training2.0.py`  (RTX 2080Ti|checking)
+Self-Training: `scripts/multi_rc/topk_evidence_self_training/self_training2.0.py`  (RTX 2080Ti|checked)  
 Co-Training: `scripts/multi_rc/topk_evidence_co_training/cotraining_top_k2.0.py`  
 
 ### Dream   
 
 MLP: `scripts/dream/scratch/mlp1.0.py`  
-HA: `scripts/dream/self-training/self-training4.0.py` -recurrent0
-Self-Training: `scripts/dream/self-training/self-training4.0.py`  
+HA: `scripts/dream/self-training/self-training4.0.py` -recurrent0 (RTX 2080Ti|checked)  
+Self-Training: `scripts/dream/self-training/self-training4.0.py`  (RTX 2080Ti|checked)  
 Co-Training: `scripts/dream/co-training/co-training2.0.py`  
 Rule: `scripts/dream/rule/rule_idf_1.0.py`  
 Reinforce: `scripts/dream/reinforce/reinforce_fine_tune1.1.py`
