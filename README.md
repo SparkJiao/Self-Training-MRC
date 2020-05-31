@@ -14,12 +14,12 @@ $ cd Self-Training-MRC
 $ pip install -r requirements.txt
 ````
 
-Besides, the [apex](https://github.com/NVIDIA/apex) toolkit should be installed:  
+Besides, the [apex](https://github.com/NVIDIA/apex) toolkit with specified version should be installed:  
 
 ````
 $ git clone https://github.com/NVIDIA/apex
 $ cd apex
-$ git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
+$ git reset --hard 66158f66a027a2e7de483d9b3e6ca7c889489b13
 $ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ````
 
@@ -28,12 +28,6 @@ $ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--c
 to  
 ``if (bare_metal_major != torch_binary_major):``  
 and the installation will be completed.
-
-**Note**: Currently, the apex package with latest version will throw a error during installation due to some unknown reasons. Currently (till 5/23/2020) the solution is to roll the version back through:
-````git
-$ git reset --hard 66158f66a027a2e7de483d9b3e6ca7c889489b13
-````
-For more details, please check the [issue](https://github.com/NVIDIA/apex/issues/802).
 
 Before running the experiments, the nltk data should be downloaded if it haven't been:
 ````
