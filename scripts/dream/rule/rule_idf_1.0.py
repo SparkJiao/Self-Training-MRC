@@ -28,14 +28,14 @@ def wait_for_file(file: str, minute: int = 1):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/dream/data/train_in_race.json'
-dev_file = '/home/jiaofangkai/dream/data/dev_in_race.json'
-test_file = '/home/jiaofangkai/dream/data/test_in_race.json'
+train_file = 'data/dream/train_in_race.json'
+dev_file = 'data/dream/dev_in_race.json'
+test_file = 'data/dream/test_in_race.json'
 
 task_name = 'dream'
 reader_name = 'multiple-race'

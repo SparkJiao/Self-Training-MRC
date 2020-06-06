@@ -6,13 +6,13 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '../../ms-marco/dp0.7/train-yesno-cb-dp70.json'
-dev_file = '../../ms-marco/dp0.7/dev-yesno-cb-dp70.json'
+train_file = 'data/ms_marco_dp0.7/train-yesno-cb-dp70.json'
+dev_file = 'data/ms_marco_dp0.7/dev-yesno-cb-dp70.json'
 
 task_name = 'marco-cb-dp0.7'
 
@@ -63,7 +63,7 @@ cmd = f"python main_0.6.2.py \
             --bert_name {bert_name} \
             --task_name {task_name} \
             --reader_name {reader_name} " \
-    f"--evidence_lambda 0.0"
+      f"--evidence_lambda 0.0"
 
 print(cmd)
 os.system(cmd)

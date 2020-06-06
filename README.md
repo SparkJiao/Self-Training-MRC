@@ -88,10 +88,10 @@ Reinforce: `scripts/coqa-co-training/reinforce/gumbel_pretrain2.0.py` + `scripts
 
 ### MARCO
 
-Rule: `scripts/marco-cb-dp0.7-co-training/top-k-rule/rule_idf1.1.py`  
-BERT-MLP/HA: `scripts/marco-cb-dp0.7-co-training/scratch1.0.py`  
+Rule: `scripts/marco-cb-dp0.7-co-training/top-k-rule/rule_idf1.1.py`    
+BERT-MLP/HA: `scripts/marco-cb-dp0.7-co-training/scratch1.0.py`  (TITAN XP|checked)  
 Reinforce: `scripts/marco-cb-dp0.7-co-training/reinforce/pipeline1.0.py`  
-Self-Training: `scripts/marco-cb-dp0.7-co-training/top-k-self-training/self_training1.0.py`  
+Self-Training: `scripts/marco-cb-dp0.7-co-training/top-k-self-training/self_training1.0.py`  (TITAN XP|checked)  
 Co-Training: `scripts/marco-cb-dp0.7-co-training/top-k-co-training/cotraining_top_k1.2.py`  
 
 ### BoolQ
@@ -108,7 +108,7 @@ Co-Training: `scripts/multi_rc/topk_evidence_co_training/cotraining_top_k2.0.py`
 
 ### Dream   
 
-MLP: `scripts/dream/scratch/mlp1.0.py`  
+MLP: `scripts/dream/scratch/mlp1.0.py`  (RTX 2080Ti|checked)  
 HA: `scripts/dream/self-training/self-training4.0.py` -recurrent0 (RTX 2080Ti|checked)  
 Self-Training: `scripts/dream/self-training/self-training4.0.py`  (RTX 2080Ti|checked)  
 Co-Training: `scripts/dream/co-training/co-training2.0.py`  
