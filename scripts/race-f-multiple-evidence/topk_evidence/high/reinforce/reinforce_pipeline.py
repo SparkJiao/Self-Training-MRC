@@ -48,7 +48,7 @@ cmd = f'python main_multi_choice_top_k_evidence.py --bert_model bert-base-uncase
       f'--evidence_lambda 0.0  ' \
       f'--metric {metric} --do_train --do_predict --use_gumbel --freeze_bert --seed {args.seed} '
 
-# run_cmd(cmd)
+run_cmd(cmd)
 
 bert_name = 'hie-race-reinforce'
 output_dir = f'experiments/race/high/reinforce-fine-tune/v1.0_seed{args.seed}'

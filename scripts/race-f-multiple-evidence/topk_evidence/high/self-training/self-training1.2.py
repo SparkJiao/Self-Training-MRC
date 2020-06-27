@@ -56,7 +56,7 @@ recurrent_times = 10
 num_train_epochs = [3] * 10
 sentence_id_file = None
 
-root_dir = f'experiments/race/topk-evidence/high/self-training/v1.2_acc_top{k}_5'
+root_dir = f'experiments/race/topk-evidence/high/self-training/v1.2_acc_top{k}_7'
 os.makedirs(root_dir, exist_ok=True)
 
 f_handler = logging.FileHandler(os.path.join(root_dir, f'output.log'))
@@ -77,6 +77,7 @@ for i in range(recurrent_times):
     output_dir = f'{root_dir}/recurrent{i}'
 
     if i == 0:
+        # num_evidence = 3 # xxx_6
         evidence_lambda = 0.0
         learning_rate = 5e-5
     else:

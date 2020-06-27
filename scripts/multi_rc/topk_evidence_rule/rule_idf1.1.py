@@ -27,13 +27,13 @@ def wait_for_file(file: str):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/multi-rc/splitv2/train.json'
-dev_file = '/home/jiaofangkai/multi-rc/splitv2/dev.json'
+train_file = 'data/multi_rc/train.json'
+dev_file = 'data/multi_rc/dev.json'
 
 task_name = 'topk-rc'
 reader_name = 'topk-multi-rc'
@@ -63,6 +63,7 @@ cmd = f'python main_0.6.2_topk.py --bert_model bert-base-uncased ' \
       f'--do_train --do_predict ' \
       f'--do_label --sentence_id_file {rule_sentence_id_file} '
 
+run_cmd(cmd)
 # predict sentence
 
 cmd = f'python main_0.6.2_topk_predict_sentences.py --bert_model bert-base-uncased ' \
@@ -76,4 +77,4 @@ cmd = f'python main_0.6.2_topk_predict_sentences.py --bert_model bert-base-uncas
       f'--do_label --sentence_id_file {rule_sentence_id_file} ' \
       f'--num_evidence 3'
 
-run_cmd(cmd)
+# run_cmd(cmd)

@@ -20,14 +20,14 @@ def run_cmd(command: str):
 
 
 # model
-bert_base_model = "../BERT/bert-base-uncased.tar.gz"
-bert_base_vocab = "../BERT/bert-base-uncased-vocab.txt"
-bert_large_model = "../BERT/bert-large-uncased.tar.gz"
-bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
+bert_base_model = "~/bert-base-uncased.tar.gz"
+bert_base_vocab = "~/bert-base-uncased-vocab.txt"
+# bert_large_model = "../BERT/bert-large-uncased.tar.gz"
+# bert_large_vocab = "../BERT/bert-large-uncased-vocab.txt"
 
-train_file = '/home/jiaofangkai/dream/data/train_in_race.json'
-dev_file = '/home/jiaofangkai/dream/data/dev_in_race.json'
-test_file = '/home/jiaofangkai/dream/data/test_in_race.json'
+train_file = 'data/dream/train_in_race.json'
+dev_file = 'data/dream/dev_in_race.json'
+test_file = 'data/dream/test_in_race.json'
 
 task_name = 'dream'
 reader_name = 'multiple-race'
@@ -61,9 +61,9 @@ metric = 'accuracy'
 evidence_lambda = 0.0
 
 learning_rate = 2e-5
-num_train_epochs = 5
+num_train_epochs = 8
 reward_func = 1
-output_dir = f'experiments/dream/reinforce-fine-tune/v1.0_seed{args.seed}'
+output_dir = f'experiments/dream/reinforce-fine-tune/v1.1_seed{args.seed}'
 
 cmd = f'python main_multi_choice_top_k_evidence.py --bert_model bert-base-uncased ' \
       f'--vocab_file {bert_base_vocab} --model_file {bert_base_model} --output_dir {output_dir} --predict_dir {output_dir} ' \
