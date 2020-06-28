@@ -49,9 +49,9 @@ metric = 'accuracy'
 os.makedirs('experiments/race/topk-evidence/high/rule/', exist_ok=True)
 gen_cmd = f'python scripts/gen_evidence_by_rule.py --task_name RACE --input_file {train_file} --top_k {70000} ' \
     f'--num_evidences {2} --output_file experiments/race/topk-evidence/high/rule/sentence_id_rule1.0-70000-2.json'
-run_cmd(gen_cmd)
+# run_cmd(gen_cmd)
 
-output_dir = f'experiments/race/topk-evidence/high/rule/idf_v1.0'
+output_dir = f'experiments/race/topk-evidence/high/rule/idf_v2.0'
 rule_sentence_id_file = 'experiments/race/topk-evidence/high/rule/sentence_id_rule1.0-70000-2.json'
 
 cmd = f'python main_multi_choice_top_k_evidence.py --bert_model bert-base-uncased ' \

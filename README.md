@@ -58,15 +58,15 @@ While the latter is due to being extracting through a randomly drop process. The
 ### RACE
 #### Middle
 MLP: `scripts/race-f-multiple-evidence/topk_evidence/middle/scratch/scratch1.0.py`  (RTX 2080Ti|checked)   
-rule: `scripts/race-f-multiple-evidence/topk_evidence/middle/rule/rule_idf_1.0.py`  
+rule: `scripts/race-f-multiple-evidence/topk_evidence/middle/rule/rule_idf_1.0.py`  (RTX 2080Ti|checked)  
 Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/middle/reinforce/reinforce_pipeline.py` (TITAN XP|checked)    
 Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/middle/co-training/co-training1.0.py`  
 Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/middle/self-training/self-training1.0.py`  (RTX 2080Ti|checked)  
 
 #### High
 MLP: `scripts/race-f-multiple-evidence/topk_evidence/high/scratch/scratch1.0.py`  (RTX 2080Ti|checked)   
-rule: `scripts/race-f-multiple-evidence/topk_evidence/high/rule/rule_idf_1.0.py`  
-Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/high/reinforce/reinforce_pipeline.py`  (TITAN XP|checking 168 mrc1)  
+rule: `scripts/race-f-multiple-evidence/topk_evidence/high/rule/rule_idf_1.0.py`  (RTX 2080Ti|checking)  
+Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/high/reinforce/reinforce_pipeline.py`  (TITAN XP|checked)  
 Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/co-training/co-training2.0.py`  
 Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/self-training/self-training1.2.py`  (RTX 2080Ti|checking 166 mrc0)
 
@@ -82,7 +82,7 @@ Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/combine/co-training
 BERT-MLP/HA/HA+Gold: `scripts/coqa/coqa_scratch_lr_test2.py`  (TITAN XP|checked)  
 Self-Training: `scripts/coqa-co-training/topk_evidence_self_training/self_training1.0.py`  (TITAN XP|checked)  
 Co-Training: `scripts/coqa-co-training/topk_evidence/cotraining_top_k1.3.py`  
-RoBERTa-Self-Training: `2.0第一轮参数+1.2后续轮参数`  
+RoBERTa-Self-Training: `2.0 for iteration 0 and 1.2 for iterations afterwards.`  
 Rule:   
 Reinforce: `scripts/coqa-co-training/reinforce/gumbel_pretrain2.0.py` + `scripts/coqa-co-training/reinforce/reinforce3.0.py`  (TITAN XP|checked)  
 
@@ -101,7 +101,7 @@ Co-Training: `scripts/marco-cb-dp0.7-co-training/top-k-co-training/cotraining_to
 MLP: `scripts/multi_rc/scratch/mlp1.0.py`  (RTX 2080Ti|checked)  
 HA: `scripts/multi_rc/topk_scratch/hie.py`  (RTX 2080Ti|checked)  
 HA-super: `scripts/multi_rc/topk_scratch/hie-super.py`  (RTX 2080Ti|checked)  
-Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`  (RTX 2080Ti|checked)
+Rule: `scripts/multi_rc/topk_evidence_rule/rule_idf1.1.py`  (RTX 2080Ti|checked)  
 Reinforce: `scripts/multi_rc/reinforce/reinforce_fine_tune1.0.py`  (TITAN XP|checked)  
 Self-Training: `scripts/multi_rc/topk_evidence_self_training/self_training2.0.py`  (RTX 2080Ti|checked)  
 Co-Training: `scripts/multi_rc/topk_evidence_co_training/cotraining_top_k2.0.py`  
