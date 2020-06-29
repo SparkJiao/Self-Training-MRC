@@ -10,6 +10,7 @@ Our CUDA toolkit version is 10.1. Firstly, you need to create a new virtual envi
 
 ````
 $ conda create -n self-training-mrc python=3.6.9
+$ conda activate self-training-mrc
 $ cd Self-Training-MRC
 $ pip install -r requirements.txt
 ````
@@ -113,5 +114,20 @@ HA: `scripts/dream/self-training/self-training4.0.py` -recurrent0 (RTX 2080Ti|ch
 Self-Training: `scripts/dream/self-training/self-training4.0.py`  (RTX 2080Ti|checked)  
 Co-Training: `scripts/dream/co-training/co-training2.0.py`  
 Rule: `scripts/dream/rule/rule_idf_1.0.py`  (RTX 2080Ti|checked)  
-Reinforce: `scripts/dream/reinforce/reinforce_fine_tune1.1.py`  (TITAN XP|checked)
+Reinforce: `scripts/dream/reinforce/reinforce_fine_tune1.1.py`  (TITAN XP|checked)  
+
+## Citing
+
+Please kindly cite our paper if this paper and the code are helpful.
+
+````
+@inproceedings{stm-mrc-2020,
+  author    = {Yilin Niu and Fangkai Jiao and Mantong Zhou and Ting Yao and Jingfang Xu and Minlie Huang},
+  title     = {A Self-Training Method for Machine Reading Comprehension with Soft Evidence Extraction},
+  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {3916--3927},
+  publisher = {{ACL}},
+  year      = {2020}
+}
+````
 
