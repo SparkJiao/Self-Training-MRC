@@ -69,7 +69,7 @@ MLP: `scripts/race-f-multiple-evidence/topk_evidence/high/scratch/scratch1.0.py`
 rule: `scripts/race-f-multiple-evidence/topk_evidence/high/rule/rule_idf_1.0.py`  (RTX 2080Ti|checking)  
 Reinforce: `scripts/race-f-multiple-evidence/topk_evidence/high/reinforce/reinforce_pipeline.py`  (TITAN XP|checked)  
 Co-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/co-training/co-training2.0.py`  
-Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/self-training/self-training1.2.py`  (RTX 2080Ti|checking 166 mrc0)
+Self-Training: `scripts/race-f-multiple-evidence/topk_evidence/high/self-training/self-training1.2.py`  (RTX 2080Ti|checked)  
 
 #### All
 MLP: `scripts/race-f-multiple-evidence/topk_evidence/combine/scratch/scratch1.0.py`  
