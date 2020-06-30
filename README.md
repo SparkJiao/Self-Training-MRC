@@ -40,7 +40,7 @@ python
 **Note**: For experiments based on RoBERTa, the [transformers](https://github.com/huggingface/transformers) should be installed. Version is specified as `transformers==2.1.0`.
 We recommend to use another virtual environment to conduct the experiments with RoBERTa, since we have observed this package has a effect on the performance for other experiments.  
 
-**Note**: The hardware environments are different in our experiments. Most of them are reproducible using TITAN XP and others were conducted on RTX 2080 Ti. We will give the notes.
+**Note**: The hardware environments are different in our experiments. Most of them are reproducible using RTX 2080Ti and others were conducted on TITAN XP. We will give the notes.
 
 ## Scripts for Dataset Preprocess
 
@@ -52,8 +52,15 @@ RACE: `data_preprocess/race_data_processing.ipynb`
 To use these scripts, change the data file path in the notebook as your own path and run it. Then change the input file path in the experiment scripts to the output file.
 For CoQA, you don't need extra preprocess and the initial data file can be assigned as the input file.
 
-To make sure that our experiments is reproducible, we will release the process data for RACE and MS Marco. The former is due to the random order of reading files.
-While the latter is due to being extracting through a randomly drop process. The released data can be found under ``data/``.  
+### Data files affected by the randomness of local system
+
+To make sure that our experiments is reproducible, we will release the processed data files including:
+- Processed RACE dataset file
+- Processed MS Marco dataset file
+- Extracted evidence sentence files of RACE-High for reproducing BERT-HA-Rule
+
+In the dataset file, the randomness will affect the order of instances while in the evidence files, it will be affected when there are several sentences with the same similarity with the passage and question. 
+The dataset files can be found under the `data` directory and the rule-based evidence sentence files can be found under the `experiments/race/topk-evidence/high/rule/` directory.  
 
 ## Scripts for Experiments
 ### RACE
