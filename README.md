@@ -104,6 +104,8 @@ Co-Training: `scripts/marco-cb-dp0.7-co-training/top-k-co-training/cotraining_to
 
 ### BoolQ
 
+Self-Training & HA: `scripts/boolq-cotraining/topk_evidence/selftraining_split_type.py`
+
 ### Multi-RC
 
 MLP: `scripts/multi_rc/scratch/mlp1.0.py`  (RTX 2080Ti|checked)  
